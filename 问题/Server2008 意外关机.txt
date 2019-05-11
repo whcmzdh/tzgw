@@ -1,0 +1,10 @@
+wlms.exe导致意外关机
+
+solution: pstools: psexec.exe -d -i -s regedit.exe
+VLMS -
+HKLM\system\currentcontrolset\services\wlms
+imagepath 
+%SystemRoot%\system32
+Start
+04 16进制
+reboot check vmls
