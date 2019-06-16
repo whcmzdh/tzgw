@@ -91,6 +91,7 @@
             this.weight = new System.Windows.Forms.TextBox();
             this.len = new System.Windows.Forms.TextBox();
             this.newbatch = new System.Windows.Forms.TextBox();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.button7 = new System.Windows.Forms.Button();
             this.printerlist = new System.Windows.Forms.ComboBox();
             this.button13 = new System.Windows.Forms.Button();
@@ -100,13 +101,13 @@
             this.lilun = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.prttj = new System.Windows.Forms.ComboBox();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.boxqty = new System.Windows.Forms.TextBox();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.prtxh = new System.Windows.Forms.TextBox();
             this.button19 = new System.Windows.Forms.Button();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.prtjz = new System.Windows.Forms.TextBox();
             this.prtsj = new System.Windows.Forms.TextBox();
@@ -153,6 +154,7 @@
             this.f20 = new System.Windows.Forms.TextBox();
             this.f10 = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.inforg = new System.Windows.Forms.CheckBox();
             this.dlfw = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.desc6 = new System.Windows.Forms.Label();
@@ -178,7 +180,6 @@
             this.infowl = new System.Windows.Forms.TextBox();
             this.infof1 = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
-            this.prttj = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(dataGridView3)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -522,7 +523,7 @@
             this.cls.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cls.Location = new System.Drawing.Point(72, 383);
             this.cls.Name = "cls";
-            this.cls.Size = new System.Drawing.Size(146, 30);
+            this.cls.Size = new System.Drawing.Size(117, 30);
             this.cls.TabIndex = 13;
             this.cls.TextChanged += new System.EventHandler(this.cls_TextChanged);
             // 
@@ -890,6 +891,22 @@
             this.newbatch.TabIndex = 8;
             this.newbatch.TextChanged += new System.EventHandler(this.newbatch_TextChanged);
             // 
+            // comboBox4
+            // 
+            this.comboBox4.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Items.AddRange(new object[] {
+            "A",
+            "M",
+            "L",
+            "F",
+            "S"});
+            this.comboBox4.Location = new System.Drawing.Point(420, 45);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(39, 22);
+            this.comboBox4.TabIndex = 11;
+            this.comboBox4.Text = "A";
+            // 
             // button7
             // 
             this.button7.Location = new System.Drawing.Point(259, 68);
@@ -1005,6 +1022,18 @@
             this.groupBox5.Text = "箱";
             this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
             // 
+            // prttj
+            // 
+            this.prttj.FormattingEnabled = true;
+            this.prttj.Items.AddRange(new object[] {
+            "温度≤24℃ 湿度≤65%",
+            "温度≤30℃ 湿度≤65%"});
+            this.prttj.Location = new System.Drawing.Point(65, 143);
+            this.prttj.Name = "prttj";
+            this.prttj.Size = new System.Drawing.Size(175, 20);
+            this.prttj.TabIndex = 19;
+            this.prttj.Text = "温度≤24℃ 湿度≤65%";
+            // 
             // checkBox6
             // 
             this.checkBox6.AutoSize = true;
@@ -1068,20 +1097,6 @@
             this.button19.Text = "快记工具";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
-            // 
-            // comboBox4
-            // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Items.AddRange(new object[] {
-            "A",
-            "M",
-            "L",
-            "F"});
-            this.comboBox4.Location = new System.Drawing.Point(422, 46);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(39, 20);
-            this.comboBox4.TabIndex = 11;
-            this.comboBox4.Text = "A";
             // 
             // comboBox3
             // 
@@ -1520,6 +1535,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.inforg);
             this.groupBox4.Controls.Add(this.dlfw);
             this.groupBox4.Controls.Add(this.checkBox2);
             this.groupBox4.Controls.Add(this.desc6);
@@ -1555,6 +1571,16 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "纺位生产信息";
             // 
+            // inforg
+            // 
+            this.inforg.AutoSize = true;
+            this.inforg.Location = new System.Drawing.Point(264, 26);
+            this.inforg.Name = "inforg";
+            this.inforg.Size = new System.Drawing.Size(48, 16);
+            this.inforg.TabIndex = 19;
+            this.inforg.Text = "限定";
+            this.inforg.UseVisualStyleBackColor = true;
+            // 
             // dlfw
             // 
             this.dlfw.AutoSize = true;
@@ -1571,7 +1597,7 @@
             this.checkBox2.AutoSize = true;
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(264, 40);
+            this.checkBox2.Location = new System.Drawing.Point(264, 50);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(48, 16);
             this.checkBox2.TabIndex = 17;
@@ -1783,18 +1809,6 @@
             this.label29.TabIndex = 2;
             this.label29.Text = "-";
             // 
-            // prttj
-            // 
-            this.prttj.FormattingEnabled = true;
-            this.prttj.Items.AddRange(new object[] {
-            "温度≤24℃ 湿度≤65%",
-            "温度≤30℃ 湿度≤65%"});
-            this.prttj.Location = new System.Drawing.Point(65, 143);
-            this.prttj.Name = "prttj";
-            this.prttj.Size = new System.Drawing.Size(175, 20);
-            this.prttj.TabIndex = 19;
-            this.prttj.Text = "温度≤24℃ 湿度≤65%";
-            // 
             // tansi_hou
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1978,6 +1992,7 @@
         private System.Windows.Forms.Label label48;
         private System.Windows.Forms.CheckBox dlfw;
         private System.Windows.Forms.ComboBox prttj;
+        private System.Windows.Forms.CheckBox inforg;
         public static System.Windows.Forms.DataGridView dataGridView2;
         public static System.Windows.Forms.DataGridView dataGridView3;
         public static System.Windows.Forms.DataGridView dataGridView1;

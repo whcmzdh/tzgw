@@ -81,7 +81,7 @@ namespace tzgw
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            string sql0 = string.Format("select T1.material as 物料,T2.desc1 as 型号,T1.sloc as 库位,T1.qatype as 类别,T1.batchbig as 批次,T1.batch as 卷号,T1.pro1 as 重量,T1.len as 长度,T1.tpno as 托盘,T1.t1 as 开始生产时间,T1.t2 as 结束生产时间,T1.c5 as 工位 from stock T1 left join masterdata T2 on T1.material=T2.itemcode where boxno='{0}'", dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString().Trim());
+            string sql0 = string.Format("select T1.material as 物料,T1.c5 as 工位,T1.sloc as 库位,T1.qatype as 类别,T1.batchbig as 批次,T1.batch as 卷号,T1.pro1 as 重量,T1.len as 长度,T1.t1 as 开始生产时间,T1.t2 as 结束生产时间,T2.desc1 as 型号,T1.tpno as 托盘 from stock T1 left join masterdata T2 on T1.material=T2.itemcode where boxno='{0}'", dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString().Trim());
             DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             ds = Class1.GetAllDataSet(sql0);

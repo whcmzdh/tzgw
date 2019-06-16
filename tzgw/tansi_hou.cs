@@ -418,14 +418,40 @@ namespace tzgw
 
         private void button4_Click(object sender, EventArgs e)
         {
+            string allowprint = "1";
+            string allowinsert = "1";
+            if (inforg.Checked == true)
+            {
+                if (Convert.ToInt32(gw.Text) >= Convert.ToInt32(infof1.Text) & Convert.ToInt32(gw.Text) <= Convert.ToInt32(infof2.Text))
+                {
+                    allowprint = "1";
+                }
+                else
+                {
+                    allowprint = "0";
+                    MessageBox.Show("工位不在限定范围内");
+                }
+            }
+            else
+            {
+                allowprint = "1";
+            }
+                
 
-
-                if (gw.Text != "" & newbatch.Text.Length==11 & rollbatch.Text != "" & flen.Text != "" & fweight.Text != "" & cls.Text != "")
+            if (allowprint == "1" & gw.Text != "" & newbatch.Text.Length==11 & rollbatch.Text != "" & flen.Text != "" & fweight.Text != "" & cls.Text != "")
                 {
 
-
-
-                    string sql = string.Format("insert into stock(branch,sloc,material,batch,displaybatch,stockin,t1,t2,boxno,qa,pro1,len,rmbatch,rmbatch1,batchbig,c5,qatype,qa2,qa2r,tpno,shift1,rmbatch2) values('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','','{19}','{20}')", "tz", Class1.workshop, mt.Text, newbatch.Text, newbatch.Text, DateTime.Now, dt1.Text, dt2.Text, boxno.Text.Trim(), qa.Text, fweight.Text.ToString(), flen.Text.ToString(), yspc.Text.Trim(), rmbatch1.Text, rollbatch.Text, Class1.workshop + "-" + gw.Text, cls.Text, qa2.Text,qa2r.Text,comboBox6.Text,rmbatch2.Text);
+                if (boxno.Text.Substring(0, 1) != "t")
+                {
+                    if (MessageBox.Show("默认下卷箱号错误，请确认是否向此箱加入此卷?", "默认箱号", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                    {
+                        allowinsert = "0";
+                    }
+                }
+                
+                if (allowinsert == "1")
+                {
+                    string sql = string.Format("insert into stock(branch,sloc,material,batch,displaybatch,stockin,t1,t2,boxno,qa,pro1,len,rmbatch,rmbatch1,batchbig,c5,qatype,qa2,qa2r,tpno,shift1,rmbatch2) values('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','','{19}','{20}')", "tz", Class1.workshop, mt.Text, newbatch.Text, newbatch.Text, DateTime.Now, dt1.Text, dt2.Text, boxno.Text.Trim(), qa.Text, fweight.Text.ToString(), flen.Text.ToString(), yspc.Text.Trim(), rmbatch1.Text, rollbatch.Text, Class1.workshop + "-" + gw.Text, cls.Text, qa2.Text, qa2r.Text, comboBox6.Text, rmbatch2.Text);
                     int c1 = Class1.ExcuteScal(sql);
                     if (c1 == 1)
                     {
@@ -437,8 +463,8 @@ namespace tzgw
                             BarTender.Application btApp;
                             BarTender.Format btFormat;
                             btApp = new BarTender.Application();
-                        btFormat = btApp.Formats.Open(@"C:\data\tzgw-labeltemplete\tansi", false, "");
-                        if (comboBox4.Text == "A")
+                            btFormat = btApp.Formats.Open(@"C:\data\tzgw-labeltemplete\tansi", false, "");
+                            if (comboBox4.Text == "A")
                             {
                                 btFormat = btApp.Formats.Open(@"C:\data\tzgw-labeltemplete\tansi", false, "");
                             }
@@ -470,66 +496,69 @@ namespace tzgw
                             btFormat.Close(BarTender.BtSaveOptions.btSaveChanges); //退出时是否保存标签
                             Class1.killbartender();
                         }
-                    string sql3 = "";
-                    if (dlfw.Checked == true)
-                    {
-                        sql3 = string.Format("update box set comm2='{0}' where workshop='{1}' and itemcode='{2}' and boxnm='{3}'", newbatch.Text, Class1.curuser, mt.Text, cls.Text);
+                        string sql3 = "";
+                        if (dlfw.Checked == true)
+                        {
+                            sql3 = string.Format("update box set comm2='{0}' where workshop='{1}' and itemcode='{2}' and boxnm='{3}'", newbatch.Text, Class1.curuser, mt.Text, cls.Text);
 
-                    }
-                    else
-                    {
-                        sql3 = string.Format("update box set comm2='{0}' where workshop='{1}' and itemcode='{2}' and boxnm='{3}'", newbatch.Text, Class1.workshop, mt.Text, cls.Text);
+                        }
+                        else
+                        {
+                            sql3 = string.Format("update box set comm2='{0}' where workshop='{1}' and itemcode='{2}' and boxnm='{3}'", newbatch.Text, Class1.workshop, mt.Text, cls.Text);
 
-                    }
-                    int c3 = Class1.ExcuteScal(sql3);
+                        }
+                        int c3 = Class1.ExcuteScal(sql3);
                         if (c3 == 1)
                         {
                             flashdataview0();
                         }
 
 
-                    if (checkBox5.Checked == false)
-                    {
-                        if (upc.Checked == false)
-                        { //连续上卷
-                            string sql2 = string.Format("update wsdevice set batchrun='{0}',status2='停止',t4='{4}' where workshop='{1}' and devicenum='{2}'", newbatch.Text, Class1.workshop, gw.Text, mt.Text, dt2.Text);
-                            int c2 = Class1.ExcuteScal(sql2);
-                            if (c2 == 1)
+                        if (checkBox5.Checked == false)
+                        {
+                            if (upc.Checked == false)
+                            { //连续上卷
+                                string sql2 = string.Format("update wsdevice set batchrun='{0}',status2='停止',t4='{4}' where workshop='{1}' and devicenum='{2}'", newbatch.Text, Class1.workshop, gw.Text, mt.Text, dt2.Text);
+                                int c2 = Class1.ExcuteScal(sql2);
+                                if (c2 == 1)
+                                {
+                                    flashdataview();
+                                    flashdataview2();
+                                    string gw1 = gw.Text;
+                                    clear1();
+                                    gw.Text = gw1;
+                                }
+
+                            }
+                            else
                             {
-                                flashdataview();
-                                flashdataview2();
-                                string gw1 = gw.Text;
-                                clear1();
-                                gw.Text = gw1;
+                                string sql2 = string.Format("update wsdevice set batchrun='{0}',status2='运行',t3='{4}' where workshop='{1}' and devicenum='{2}'", newbatch.Text, Class1.workshop, gw.Text, mt.Text, dt2.Text);
+                                int c2 = Class1.ExcuteScal(sql2);
+                                if (c2 == 1)
+                                {
+                                    flashdataview();
+                                    flashdataview2();
+                                    clear1();
+                                }
                             }
 
                         }
                         else
                         {
-                            string sql2 = string.Format("update wsdevice set batchrun='{0}',status2='运行',t3='{4}' where workshop='{1}' and devicenum='{2}'", newbatch.Text, Class1.workshop, gw.Text, mt.Text, dt2.Text);
-                            int c2 = Class1.ExcuteScal(sql2);
-                            if (c2 == 1)
-                            {
-                                flashdataview();
-                                flashdataview2();
-                                clear1();
-                            }
+                            flashdataview();
+                            flashdataview2();
+                            clear1();
                         }
 
-                    }
-                    else
-                    {
-                        flashdataview();
-                        flashdataview2();
-                        clear1();
-                    }
 
-
-                }
+                    }
                     else
                     {
                         MessageBox.Show("添加失败,请确认卷号是否重复?");
                     }
+                }
+
+
                 }
                 else
                 {
@@ -951,6 +980,10 @@ namespace tzgw
                 {
                     btFormat = btApp.Formats.Open(@"C:\data\tzgw-labeltemplete\tansiL", false, "");
                 }
+                if (comboBox4.Text == "S")
+                {
+                    btFormat = btApp.Formats.Open(@"C:\data\tzgw-labeltemplete\tansiS", false, "");
+                }
 
                 btFormat.PrintSetup.IdenticalCopiesOfLabel = 1;  //设置同序列打印的份数
                 btFormat.PrintSetup.NumberSerializedLabels = 1;  //设置需要打印的序列数
@@ -1008,6 +1041,10 @@ namespace tzgw
                     {
                         btFormat = btApp.Formats.Open(@"C:\data\tzgw-labeltemplete\tansiL", false, "");
                     }
+                    if (comboBox4.Text == "S")
+                    {
+                        btFormat = btApp.Formats.Open(@"C:\data\tzgw-labeltemplete\tansiS", false, "");
+                    }
 
                     btFormat.PrintSetup.IdenticalCopiesOfLabel = 1;  //设置同序列打印的份数
                     btFormat.PrintSetup.NumberSerializedLabels = 1;  //设置需要打印的序列数
@@ -1057,6 +1094,10 @@ namespace tzgw
                         if (comboBox4.Text == "L")
                         {
                             btFormat = btApp.Formats.Open(@"C:\data\tzgw-labeltemplete\tansiL", false, "");
+                        }
+                        if (comboBox4.Text == "S")
+                        {
+                            btFormat = btApp.Formats.Open(@"C:\data\tzgw-labeltemplete\tansiS", false, "");
                         }
                         btFormat.PrintSetup.IdenticalCopiesOfLabel = 1;  //设置同序列打印的份数
                         btFormat.PrintSetup.NumberSerializedLabels = 1;  //设置需要打印的序列数
@@ -1252,6 +1293,17 @@ namespace tzgw
                     {
                         comboBox1.Text = dataGridView1.Rows[i].Cells[0].Value.ToString().Trim();
                         cls.Text=dataGridView1.Rows[i].Cells[0].Value.ToString().Trim();
+
+                        /* 当下M或L 更改类别首字母，但会造成生成卷号的问题，待确认
+                         if (checkBox7.Checked == true)
+                         {
+                            if (cls.Text.Length >= 1)
+                            {
+                                cls.Text = cls.Text.Remove(0, 1);
+                                cls.Text = cls.Text.Insert(0, comboBox4.Text);
+                            }
+                        }
+                        */
                     }
 
                     if (mt.Text != "" & rollbatch.Text != "")

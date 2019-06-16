@@ -66,7 +66,7 @@ namespace tzgw
                     
                     break;
                 }
-                if (dataGridView2.Rows[i].DefaultCellStyle.BackColor == Color.LightBlue)
+                if (dataGridView2.Rows[i].DefaultCellStyle.BackColor == Color.LightBlue && textBox1.Text.Substring(0,1)!="S")
                 {
                     MessageBox.Show("第" + (i + 1).ToString() + "物料 # 无装箱日期 # ，请注意!");
                 }
@@ -600,6 +600,48 @@ namespace tzgw
 
 
 
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            
+                if (MessageBox.Show("确认删除记录?", "删除", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                    {
+                        if (dataGridView1.Rows[i].Selected == true)
+                        {
+                            string sql0 = string.Format("delete from stock where batch='{0}' and boxno like 'ts%' and c5 like '{1}%'", dataGridView1.Rows[i].Cells[0].Value.ToString(),Class1.workshop);
+                            int c = Class1.ExcuteScal(sql0);
+                        if (c != 1)
+                        {
+                            MessageBox.Show("删除失败，请确认是否已装箱（只能删除箱号以ts开头的卷号）");
+                        }
+
+
+                        }
+
+
+                    }
+
+                }
+            finditem();
+
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+            if (textBox1.Text.Length >= 1)
+            {
+                if (textBox1.Text.Substring(0, 1) == "S")
+                {
+                    bcbtn.Checked = false;
+                }
+                else
+                {
+                    bcbtn.Checked = true;
+                }
             }
         }
     }

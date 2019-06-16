@@ -88,6 +88,7 @@
             this.label21 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -120,7 +121,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(734, 228);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(604, 478);
+            this.dataGridView1.Size = new System.Drawing.Size(604, 449);
             this.dataGridView1.TabIndex = 3;
             // 
             // c2
@@ -464,6 +465,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(148, 21);
             this.textBox1.TabIndex = 24;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
             // 
             // button5
             // 
@@ -499,7 +501,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(800, 164);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(137, 21);
+            this.textBox2.Size = new System.Drawing.Size(48, 21);
             this.textBox2.TabIndex = 27;
             this.textBox2.Text = "500";
             // 
@@ -658,11 +660,22 @@
             this.button10.UseVisualStyleBackColor = false;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(1205, 683);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(133, 23);
+            this.button11.TabIndex = 36;
+            this.button11.Text = "永久删除选中卷号";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
             // boxpick
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1350, 718);
+            this.Controls.Add(this.button11);
             this.Controls.Add(this.ccbtn);
             this.Controls.Add(this.bcbtn);
             this.Controls.Add(this.label20);
@@ -795,5 +808,6 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
     }
 }
